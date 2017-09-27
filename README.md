@@ -16,3 +16,6 @@ Or from here maybe https://www.digicamdb.com/
 
 Scrapy tutorial:
 https://doc.scrapy.org/en/latest/intro/tutorial.html
+
+BeautifulSoup tutorial:
+http://www.pythonforbeginners.com/python-on-the-web/web-scraping-with-beautifulsoup/
