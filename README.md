@@ -1,5 +1,7 @@
 A bunch of python scripts that eventually produce pandas DataFrames for getting statistics and cute plots
 
+![3 plot figure](/multiplot.JPG?raw=true "Density plots")
+
 - specparser.py fetches all the links for camera spec pages of "relevant" vendors (currently that's all vendors listed at https://www.dpreview.com/products/)
 - the actual scrapy scraper is under cameradb/
   - run with scrapy crawl cameradb
