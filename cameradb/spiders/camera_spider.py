@@ -2,15 +2,21 @@ import scrapy
 import os
 import subprocess
 import json
-import pandas as pd
 
 class CameraSpider(scrapy.Spider):
     name = "cameradb"
 
     def start_requests(self):
-        file = 'cameras'
-        #urls = ['https://www.dpreview.com/products/agfa/compacts/agfa_dc600uw/specifications']
-
+        # after saving all the webpages somewhere, this is where you use them as input
+        
+        # specparser.py will make a "cameras" file listing all url's to all cameras to be parsed
+        file = 'cameras.txt'
+'''
+You can crawl a local file using an url of the following form:
+file:///127.0.0.1/path/to/file.html
+-->file:///127.0.0.1/media/victor/Data/code/python/cameradbgithub/cameradb/cameradatatestpage.html
+https://stackoverflow.com/questions/19910055/scrapy-storing-crawled-pages-as-static-files
+'''
         with open(file) as f:
             urls = [url.strip() for url in f.readlines()]
             for url in urls:
