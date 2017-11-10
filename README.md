@@ -9,13 +9,3 @@ A bunch of python scripts that eventually produce pandas DataFrames for getting 
 
 TODO:
 - maybe put everything into one functioning tool
-
-So there's a kind of a collection of all products on dpreview:
-
-https://www.dpreview.com/products
-example for Olympus _cameras_, not lenses:
-https://www.dpreview.com/products/olympus/cameras?subcategoryId=cameras
-example for "full" specs of a camera:
-https://www.dpreview.com/products/olympus/slrs/oly_epl1/specifications
-
-Or from here maybe https://www.digicamdb.com/
