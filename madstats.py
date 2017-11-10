@@ -2,12 +2,20 @@ import matplotlib
 matplotlib.use('tkagg')
 import matplotlib.pyplot as p
 import json
-from pprint import pprint
 from functools import reduce
 import pandas as pd
+import glob
+import os
 
-
-with open("camera_specs/all.json") as data_file:
+# read all the json files into one all.json file and load that data
+if os.path.isdir(os.getcwd()+'/camera_specs'):
+    read_files = glob.glob("camera_specs/*.json")
+else:
+    print("[!] /camera_specs doesn't exist so you might have skipped some steps...\nExiting")
+    quit()
+with open("all.json", "w") as outfile:
+    outfile.write('[{}]'.format(','.join([open(f, "r").read() for f in read_files])))
+with open("all.json") as data_file:
     data = json.load(data_file)
 
 aux=[]
@@ -21,7 +29,6 @@ for camera in data:
             aux.append(dim)
         vol = reduce(lambda x,y: x*y, aux) # in mm cube
         camera['Volume'] = round(vol/1000) # in cm cube
-        #print(camera['Model'],camera['Volume'],"cm^3")
         aux = []
     if 'Sensor size' in camera:
         camera['Sensor size'] = camera['Sensor size'].split("(")[0].strip()
@@ -45,10 +52,6 @@ resplot = resdf.plot(kind='density', title='Camera resolution (MP) by sensor siz
 p.show()
 
 '''
-https://stackoverflow.com/questions/38146009/how-to-plot-age-distribution-with-pandas
-https://stackoverflow.com/questions/16376159/plotting-a-pandas-dataseries-groupby
-https://stackoverflow.com/questions/12065885/filter-dataframe-rows-if-value-in-column-is-in-a-set-list-of-values
-
 p.show()
 p.cla()   # Clear axis
 p.clf()   # Clear figure
