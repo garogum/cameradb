@@ -1,28 +1,8 @@
-A bunch of python scripts that eventually produce pandas DataFrames for getting statistics and cute plots
+A collection of python scripts for scraping digital camera specs from dpreview.com for statistical analysis using the pandas library
 
 ![3 plot figure](/multiplot.JPG?raw=true "Density plots")
 
-- specparser.py fetches all the links for camera spec pages of "relevant" vendors (currently that's all vendors listed at https://www.dpreview.com/products/)
-- the actual scrapy scraper is under cameradb/
-  - run with scrapy crawl cameradb
-  - will use the file created with specparser.py
-  - ...these should be merged
-  - stores parsed data in JSON format
-- madstats.py processes all the data and makes a graph with some density graphs
-
-TODO:
-- put everything into one functioning tool
-- make the scraper aggregate all JSON data into all.json
-  - currently done with "jq -s '.' * > all.json" from camera_specs/ to concatenate everything
-- remove file dependencies maybe?
-
-
-So there's a kind of a collection of all products on dpreview:
-
-https://www.dpreview.com/products
-example for Olympus _cameras_, not lenses:
-https://www.dpreview.com/products/olympus/cameras?subcategoryId=cameras
-example for "full" specs of a camera:
-https://www.dpreview.com/products/olympus/slrs/oly_epl1/specifications
-
-Or from here maybe https://www.digicamdb.com/
+# Usage
+1. Run specparser.py to fetch the links for camera spec pages of all vendors listed at https://www.dpreview.com/products/. This will create a cameras.txt file which will be used as input for the scrapy crawler
+2. Run `scrapy crawl cameradb`, which will fetch all pages, saving them to /cameradata, and extracting relevant info into individual JSON files under /camera_specs
+3. Run madstats.py to aggregate all individual JSON files into a single all.json which will be used by pandas and matplotlib to generate plots.
