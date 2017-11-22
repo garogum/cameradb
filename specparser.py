@@ -24,4 +24,4 @@ for company in companies:
 with open(os.getcwd()+'/cameras.txt', 'w') as f:
     for i in listoflinks:
         f.write(i+'\n')
-print("[!] Finished writing",company," cameras to",os.getcwd()+'cameras.txt')
+print("[!] Finished writing",len(listoflinks)," cameras to",os.getcwd()+'/cameras.txt')

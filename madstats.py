@@ -35,7 +35,7 @@ for camera in data:
     if 'Effective pixels' in camera:
         camera['Effective pixels'] = int(camera['Effective pixels'].split()[0])
 
-df = pd.DataFrame(data)#, columns=['Sensor size','Volume','Weight (inc. batteries)'])
+df = pd.DataFrame(data)
 sensordf = df[df['Sensor size'].isin(sensors)]
 
 figure, axes = p.subplots(nrows=3, ncols=1, figsize=(7,10.5))
@@ -49,6 +49,17 @@ weightplot = weightdf.plot(kind='density', title='Camera weight (g) by sensor si
 resdf = sensordf.groupby('Sensor size')['Effective pixels']
 resplot = resdf.plot(kind='density', title='Camera resolution (MP) by sensor size', legend=True, grid=True, xlim=(0,60),ax=axes[2])
 
+figure.savefig('camera_density_plots')
+
+figure2, axes2 = p.subplots(nrows=1, ncols=1, figsize=(9,8))
+
+mountplot = sensordf['Lens mount'].value_counts().plot(kind='bar', title='Number of cameras per mount', rot=60, legend=True, grid=True, ax=axes2)
+for x in mountplot.patches:
+  mountplot.annotate(str(x.get_height()), (x.get_x(), x.get_height()))
+
+axes2.xaxis.grid(False)
+figure2.tight_layout()
+figure2.savefig('cameras_by_mount')
 p.show()
 
 '''
